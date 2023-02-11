@@ -156,13 +156,17 @@ public class ListOfEmployee {
     }
     public double getSalary(){
         boolean quit = false;
-        String salary = "";
+        String salary;
+        double salaryDouble = 0;
         while(!quit){
             System.out.println("Зарплата: ");
             salary = scan.nextLine();
-            quit = isValidDouble(salary);
+            if (isValidDouble(salary)) {
+                salaryDouble = Double.parseDouble(salary);
+                if (salaryDouble>0) quit = true;
+            }
         }
-        return Double.parseDouble(salary);
+        return salaryDouble;
     }
     public boolean isValidDouble(String string){
         boolean quit;
