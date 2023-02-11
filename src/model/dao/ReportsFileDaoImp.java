@@ -17,10 +17,10 @@ public class ReportsFileDaoImp implements ReportsDao{
     private final Map<String,String> departmentMap;
     private final List<Employee> data;
 
-    public ReportsFileDaoImp( Map<String, String> departmentMap,
-                             List<Employee> data) {
-        this.departmentMap = departmentMap;
-        this.data = data;
+    public ReportsFileDaoImp(  DepartmentDao departmentDao,
+                               EmployeeDao employeeDao) {
+        this.departmentMap = departmentDao.allDepartment();
+        this.data = employeeDao.allEmployee();
     }
 
     @Override

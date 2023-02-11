@@ -1,5 +1,9 @@
 package model;
 
+import model.dao.DepartmentDao;
+import model.dao.LoginDao;
+import model.dao.ProfessionDao;
+
 import java.util.Map;
 import java.util.Scanner;
 
@@ -7,17 +11,16 @@ public class Reference {
     private final Map <String,String> login;
     private final Map <String,String> departmentMap;
     private final Map <String,String[]> professionMap;
-    private final Scanner scan;
+    public Scanner scan;
     private String currentUser;
     boolean quit = false;
-    public Reference(Scanner scan, Map<String, String> login,
-                     Map<String, String> departmentMap,
-                     Map<String, String[]> professionMap) {
-        this.scan = scan;
-        this.login = login;
-        this.departmentMap = departmentMap;
-        this.professionMap = professionMap;
+    public Reference(LoginDao loginDao, DepartmentDao departmentDao,
+                     ProfessionDao professionDao) {
+        this.login = loginDao.allLogin();
+        this.departmentMap = departmentDao.allDepartment();
+        this.professionMap = professionDao.allProfession();
         this.currentUser = null;
+        this.scan = new Scanner(System.in);
     }
     public void loginList() {
         while (!quit) {

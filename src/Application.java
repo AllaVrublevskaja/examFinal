@@ -37,16 +37,15 @@ public class Application {
         data = employeeDao.allEmployee();
     }
     public void run() {
-        reference = new Reference(scan, login,departmentMap,
-                professionMap);
+        reference = new Reference(loginDao,departmentDao,professionDao);
         while (running) {
             //Если пользователь авторизован
             if (currentUser != null) {
                 if (departmentMap.size() == 0) reference.departmentList();
                 if (professionMap.size() == 0) reference.professionList();
                 if (data.size() == 0) {
-                    ListOfEmployee list = new ListOfEmployee(scan,data,
-                            departmentMap,professionMap);
+                    ListOfEmployee list = new ListOfEmployee(employeeDao,
+                            departmentDao,professionDao);
                     list.newEmployee();}
                 selectionMenu();
             } else {
@@ -96,7 +95,7 @@ private void mainMenu() {
     public void menuItem1(){
         String item;
         boolean quit = false;
-        ListOfEmployee list = new ListOfEmployee(scan,data,departmentMap,professionMap);
+        ListOfEmployee list = new ListOfEmployee(employeeDao,departmentDao,professionDao);
         while(!quit){
             System.out.println("Список сотрудников");
 
@@ -121,8 +120,8 @@ private void mainMenu() {
         String item;
         boolean quit = false;
         EmployeePredicates predicates = new EmployeePredicates();
-        ReportsFileDaoImp file = new ReportsFileDaoImp(departmentMap,data);
-        ReportsConsoleDaoImp console = new ReportsConsoleDaoImp(departmentMap,data);
+        ReportsFileDaoImp file = new ReportsFileDaoImp(departmentDao,employeeDao);
+        ReportsConsoleDaoImp console = new ReportsConsoleDaoImp(departmentDao,employeeDao);
         while(!quit){
             System.out.println("Найти сотрудника");
 
@@ -192,8 +191,8 @@ private void mainMenu() {
     public void menuItem3(){
         String item;
         boolean quit = false;
-        ReportsFileDaoImp file = new ReportsFileDaoImp(departmentMap,data);
-        ReportsConsoleDaoImp console = new ReportsConsoleDaoImp(departmentMap,data);
+        ReportsFileDaoImp file = new ReportsFileDaoImp(departmentDao,employeeDao);
+        ReportsConsoleDaoImp console = new ReportsConsoleDaoImp(departmentDao,employeeDao);
         while(!quit){
             System.out.println("Отчеты");
 
@@ -239,8 +238,8 @@ private void mainMenu() {
     public void menuItem4(){
         String item;
         boolean quit = false;
-        Reference reference = new Reference(scan, login, departmentMap,
-                professionMap);
+        Reference reference = new Reference(loginDao, departmentDao,
+                professionDao);
         while(!quit){
             System.out.println("Справочная информация");
 

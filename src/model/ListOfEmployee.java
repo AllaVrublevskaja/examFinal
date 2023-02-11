@@ -1,5 +1,9 @@
 package model;
 
+import model.dao.DepartmentDao;
+import model.dao.EmployeeDao;
+import model.dao.ProfessionDao;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -13,17 +17,18 @@ public class ListOfEmployee {
     private final List<Employee> data;
     private final Map <String,String> departmentMap;
     private final Map<String,String[]> professionMap;
-    private final Scanner scan;
+    public Scanner scan;
     private String department;
     private String supervisor;
 
-    public ListOfEmployee(Scanner scan,List<Employee> data,
-                          Map<String, String> departmentMap,
-                          Map<String, String[]> professionMap) {
-        this.scan = scan;
-        this.data = data;
-        this.departmentMap = departmentMap;
-        this.professionMap = professionMap;
+    public ListOfEmployee(EmployeeDao employeeDao,
+                          DepartmentDao departmentDao,
+                          ProfessionDao professionDao) {
+
+        this.data = employeeDao.allEmployee();
+        this.departmentMap = departmentDao.allDepartment();
+        this.professionMap = professionDao.allProfession();
+        this.scan = new Scanner(System.in);
     }
     public void newEmployee(){
         if (data.size() == 0)

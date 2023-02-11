@@ -1,7 +1,6 @@
 package model.dao;
 
 import model.Employee;
-import model.EmployeePredicates;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -14,10 +13,10 @@ public class ReportsConsoleDaoImp implements ReportsDao {
     private final Map<String,String> departmentMap;
     private final List<Employee> data;
 
-    public ReportsConsoleDaoImp(Map<String, String> departmentMap,
-                                List<Employee> data) {
-        this.departmentMap = departmentMap;
-        this.data = data;
+    public ReportsConsoleDaoImp(DepartmentDao departmentDao,
+                                EmployeeDao employeeDao) {
+        this.departmentMap = departmentDao.allDepartment();
+        this.data = employeeDao.allEmployee();
     }
     @Override
     public void reportStructure() {
